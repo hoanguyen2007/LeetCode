@@ -1,28 +1,23 @@
-// Last updated: 2/28/2026, 9:43:57 PM
+// Last updated: 3/1/2026, 9:04:01 PM
 1class Solution {
 2public:
-3    bool detectCapitalUse(string word) {
-4        int count = 0;
-5        int n = word.length();
+3    string licenseKeyFormatting(string s, int k) {
+4        string res = "";
+5        int count = 0;
 6
-7        // Bước 1: Đếm số lượng chữ hoa trong từ
-8        for (int i = 0; i < n; i++) {
-9            if (isupper(word[i])) {
-10                count++;
-11            }
-12        }
-13
-14        // Bước 2: Kiểm tra 3 điều kiện hợp lệ
-15        // 1. Tất cả là chữ hoa
-16        if (count == n) return true;
-17        
-18        // 2. Tất cả là chữ thường
-19        if (count == 0) return true;
-20        
-21        // 3. Chỉ chữ cái đầu tiên là chữ hoa
-22        if (count == 1 && isupper(word[0])) return true;
-23
-24        // Nếu không thỏa mãn các điều kiện trên
-25        return false;
-26    }
-27};
+7        // Duyệt từ phải sang trái
+8        for (int i = s.length() - 1; i >= 0; i--) {
+9            if (s[i] != '-') {
+10                // Thêm dấu gạch ngang nếu đã đủ k ký tự trong group hiện tại
+11                if (count > 0 && count % k == 0) {
+12                    res += '-';
+13                }
+14                res += toupper(s[i]);
+15                count++;
+16            }
+17        }
+18        
+19        reverse(res.begin(), res.end());
+20        return res;
+21    }
+22};

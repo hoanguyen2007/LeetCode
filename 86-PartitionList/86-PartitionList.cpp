@@ -1,36 +1,32 @@
-// Last updated: 6/20/2026, 3:38:07 PM
-1/**
-2 * Definition for singly-linked list.
-3 * struct ListNode {
-4 *     int val;
-5 *     ListNode *next;
-6 *     ListNode() : val(0), next(nullptr) {}
-7 *     ListNode(int x) : val(x), next(nullptr) {}
-8 *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-9 * };
-10 */
-11class Solution {
-12public:
-13    ListNode* partition(ListNode* head, int x) {
-14        ListNode* result1 = new ListNode(0);
-15        ListNode* result2 = new ListNode(0);
-16        if (head==nullptr || head->next == nullptr){
-17            return head;
-18        }
-19        ListNode* dau = result1;
-20        ListNode* duoi = result2;
-21        while (head!=nullptr){
-22            if (head->val < x){
-23                result1->next = new ListNode(head->val);
-24                result1 = result1->next;
-25            }
-26            else {
-27                result2->next = new ListNode(head->val);
-28                result2 = result2->next;
-29            }
-30            head = head->next;
-31        }
-32        result1->next = duoi->next;
-33        return dau->next;
-34    }
-35};
+// Last updated: 6/20/2026, 3:40:37 PM
+1class Solution {
+2public:
+3    ListNode* partition(ListNode* head, int x) {
+4        ListNode* lessHead = new ListNode(0);
+5        ListNode* greaterHead = new ListNode(0);
+6        
+7        ListNode* less = lessHead;
+8        ListNode* greater = greaterHead;
+9        
+10        while (head != nullptr) {
+11            if (head->val < x) {
+12                less->next = head;
+13                less = less->next;
+14            } else {
+15                greater->next = head;
+16                greater = greater->next;
+17            }
+18            head = head->next;
+19        }
+20        
+21        greater->next = nullptr; 
+22        less->next = greaterHead->next; 
+23        
+24        ListNode* result = lessHead->next;
+25        
+26        delete lessHead;
+27        delete greaterHead;
+28        
+29        return result;
+30    }
+31};

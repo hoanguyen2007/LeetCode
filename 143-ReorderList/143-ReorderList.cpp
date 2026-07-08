@@ -1,4 +1,4 @@
-// Last updated: 7/8/2026, 9:22:56 PM
+// Last updated: 7/8/2026, 9:23:33 PM
 1/**
 2 * Definition for singly-linked list.
 3 * struct ListNode {
@@ -12,7 +12,7 @@
 11class Solution {
 12public:
 13    void reorderList(ListNode* head) {
-14        if (head->next == nullptr || head == nullptr || head->next->next == nullptr) return ;
+14if (head == nullptr || head->next == nullptr || head->next->next == nullptr) return;
 15        ListNode* dummy = new ListNode(0);
 16        ListNode* fast = head;
 17        ListNode* slow = head;
